@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>014_事件处理</title>
+</head>
+<body>
+<div id="root">
+    <button v-on:click="handleShow">v-on:click</button>
+    <button @click="handleShow">@click</button>
+    <button @click="handleShow2(18,$event)">传参</button>
+</div>
+</body>
+</html>
+<script src="./js/vue.js"></script>
+<script>
+    new Vue({
+        el: '#root',
+        data() {
+            return {
+            }
+        },
+        methods: {
+            handleShow() {
+                console.log(e);
+                alert('show')
+            },
+            handleShow2(num, e) {
+                console.log('[num]', num)
+                console.log('[e]', e)
+            }
+        }
+    })
+</script>

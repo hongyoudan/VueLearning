@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>010_el与data的两种写法</title>
+</head>
+<body>
+<div id="root">
+    <h1>{{name}}</h1>
+</div>
+</body>
+
+</html>
+<script src="./js/vue.js"></script>
+<script>
+
+    //<!-- 绑定容器第一种：el -->
+    new Vue({
+        el:'#root',
+        data:{
+            name: 'hello'
+        }
+    })
+
+    //<!-- 绑定容器第二种：$mount -->
+    new Vue({
+        data: {
+            name: 'hello'
+        }
+    }).$mount('#root')
+
+    //<!-- data对象式声明 -->
+    new Vue({
+        data: {
+            name: 'hello'
+        }
+    }).$mount('#root')
+
+    //<!-- data函数式声明 -->
+    new Vue({
+        data() {
+            return {
+                name: 'hello'
+            }
+        }
+    }).$mount('#root')
+</script>

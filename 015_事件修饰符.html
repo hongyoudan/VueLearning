@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>015_事件修饰符</title>
+</head>
+<style>
+    * {
+        margin-top: 10px;
+    }
+</style>
+<body>
+<div id="root">
+    <!--  Vue 中的事件修饰符：-->
+    <!--  1. prevent：阻止默认事件（常用）-->
+    <!--  2. stop：阻止事件冒泡（常用）-->
+    <!--  3. once：事件只触发一次（常用）-->
+    <!--  4. capture：使用事件的捕获模式-->
+    <!--  5. self：只有 event.target 是当前操作的元素时才触发事件-->
+    <!--  6. passive：事件的默认行为立即执行，无需等待事件回调执行完毕-->
+
+    <!--  1. prevent：阻止默认事件（常用）-->
+    <!--  点击此链接会先弹窗，点击弹窗确定按钮后，打开百度网页。为了阻止点击确定后打开百度的情况就需要加上prevent  -->
+    <a href="http://baidu.com" @click.prevent="handleShow">1. prevent：阻止默认事件</a>
+
+    <!--  2. stop：阻止事件冒泡（常用）-->
+    <!--  点击button后会触发两次弹窗，即由button->div，由下至上类似于冒泡。为了阻止产生冒泡，则需要在内层加上stop  -->
+    <div style="background: aquamarine;height: 50px" @click="handleShow">
+        <button @click.stop="handleShow">2. stop：阻止事件冒泡</button>
+    </div>
+
+    <!--  3. once：事件只触发一次（常用）-->
+    <!--  点击button后出现弹窗，之后再次点击都可以点击button触发弹窗，如果只想点击一次button之后，再次点击不能触发弹窗时就要加上once  -->
+    <button @click="handleShow">3. once：事件只触发一次</button>
+
+    <!--  4. capture：使用事件的捕获模式-->
+    <!--  点击内层div后会先触发内层点击事件，然后是外层点击事件。为了阻止出现这种情况，就要在外层div加上capture  -->
+    <div style="background: aqua;padding: 5px" @click.capture="handleShowMsg(1)">
+        div-1 4. capture：使用事件的捕获模式
+        <div style="background: cornflowerblue;height: 30px" @click="handleShowMsg(2)">
+            div-2 4. capture：使用事件的捕获模式
+        </div>
+    </div>
+
+    <!--  5. self：只有 event.target 是当前操作的元素时才触发事件-->
+    <!--  点击button会先触发内层点击事件，然后是外层，只点击外层只会触发外层点击事件。为了阻止出现这种情况，就需要在外层加上self  -->
+    <div style="background: aquamarine" @click.self="handleShowMsg(1)">
+        <button @click="handleShowMsg(2)">5. self：只有 event.target 是当前操作的元素时才触发事件</button>
+    </div>
+
+    <!--  6. passive：事件的默认行为立即执行，无需等待事件回调执行完毕-->
+</div>
+</body>
+</html>
+<script src="./js/vue.js"></script>
+<script>
+    new Vue({
+        el: '#root',
+        data() {
+            return {}
+        },
+        methods: {
+            handleShow() {
+                alert('hello')
+            },
+            handleShowMsg(msg) {
+                alert(msg)
+            }
+        }
+    })
+</script>
